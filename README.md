@@ -5,6 +5,8 @@ bbduk https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/bbduk-guide
 
 
 a. open interactive session in cluster, load bbmap
+
+
         Sinteractive -c 16 -m 128G -t 02:00:00
         module load gcc bbmap/38.63
         
