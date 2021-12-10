@@ -84,10 +84,17 @@ so need to replace Rhizophagus irregularis strain A1 chromosome 3 by A1_chr_3
 # SNP calling
 
 # Call SNP
-     module load gcc freebayes
-     mkdir 03_SNP_Rhiir;
+
+        Sinteractive -c 16 -m 128G -t 02:00:00
+         module load gcc samtools
+        module load gcc freebayes
+        mkdir 01_SNP_B1;
      
-     # Choose only contigs of DE genes.
+        # Split co-inoculation bam file by contig
+         for i in $(ls Unmapped_Mesculenta_COL2215_B1DAOM197198_1_mapped_B1_Sorted_Q30.bam); do echo $i; bamtools split -in $i -reference; done
+         
+        # Choose only contigs of DE genes.
+     
      
      for i in $(ls *.bam); do echo $i; freebayes --fasta-reference DAOM.fa --report-monomorphic -C 10 -p 1 $i > 03_SNP_Rhiir_$(echo $i | cut -d'_' -f1,2,3,4,5).vcf; done
 
